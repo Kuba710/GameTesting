@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5544e0519846a214db226244d74aa5bb, type: 3}
+  m_Name: Gloves_Rare
+  m_EditorClassIdentifier: 
+  Guid: 0f159c1c-ff31-4e1b-9323-1aa9ea787a85
+  ItemIcon: {fileID: 21300000, guid: 16d17d4ae0f910c4e8606a031aaadc88, type: 3}
+  ItemName: Rare Gloves
+  Price: 20
+  Stackable: 0
+  Description: There are xx Gloves
+  SlotType: 3
+  RareLevel: 1
+  statsToModify: 02000000
+  modifyValue:
+  - 20

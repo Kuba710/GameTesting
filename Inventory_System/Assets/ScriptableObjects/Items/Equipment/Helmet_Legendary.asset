@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5544e0519846a214db226244d74aa5bb, type: 3}
+  m_Name: Helmet_Legendary
+  m_EditorClassIdentifier: 
+  Guid: f29ce07f-cc38-4ed6-9984-36475cd9ff65
+  ItemIcon: {fileID: 21300000, guid: 3105960ef57106c4fab172b2876b8e5f, type: 3}
+  ItemName: Legendary Helmet
+  Price: 50
+  Stackable: 0
+  Description: This is x Helmet
+  SlotType: 0
+  RareLevel: 3
+  statsToModify: 0200000003000000
+  modifyValue:
+  - 50
+  - 10

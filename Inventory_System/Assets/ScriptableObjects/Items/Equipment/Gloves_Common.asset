@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5544e0519846a214db226244d74aa5bb, type: 3}
+  m_Name: Gloves_Common
+  m_EditorClassIdentifier: 
+  Guid: 1474e39a-5bdf-4ef1-a8db-9d5448cd3b71
+  ItemIcon: {fileID: 21300000, guid: 645e380066242c747a7ca69f5478a88f, type: 3}
+  ItemName: Common Gloves
+  Price: 10
+  Stackable: 0
+  Description: There are xx Gloves
+  SlotType: 3
+  RareLevel: 0
+  statsToModify: 02000000
+  modifyValue:
+  - 10
