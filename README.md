@@ -19,6 +19,18 @@ Na projekt składa się fragment kodu z pracy inżynierskiej. Projekt na ten mom
 # Dokumentacja API
 
 # Scenariusze testowe dla testera manualnego
+| Test Case ID | Opis | Kroki testowe | Oczekiwany wynik |
+|------------|------------|------------|------------|
+| TC_01 |  | 1.  <br/> 2.  |   |
+| TC_02 |  | 1.  <br/> 2.  |   |
+| TC_03 |  | 1.  <br/> 2.  |   |
+| TC_04 |  | 1.  <br/> 2.  |   |
+| TC_05 |  | 1.  <br/> 2.  |   |
+| TC_06 |  | 1.  <br/> 2.  |   |
+| TC_07 |  | 1.  <br/> 2.  |   |
+| TC_08 |  | 1.  <br/> 2.  |   |
+| TC_09 |  | 1.  <br/> 2.  |   |
+| TC_10 |  | 1.  <br/> 2.  |   |
 
 
 # Technologie użyte w projekcie
