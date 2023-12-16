@@ -26,11 +26,11 @@ Na projekt składa się fragment kodu z pracy inżynierskiej. Projekt na ten mom
 | TC_03 | Test sprawdza poprawność działania blokerów na granicy mapy. | 1. Uruchom grę <br/> 2. Za pomocą klawiszy WASD spróbuj wyjść poza obszar mapy  | Gracz jest blokowany przez drzewa znajdujące się na mapie i nie może opuścić danego obszaru  |
 | TC_04 | Test sprawdza poprawność podnoszenia przedmiotów | 1. Uruchom grę  <br/> 2. Za pomocą klawiszy WASD, poruszając się po mapie stań na  przedmiocie. | Przedmiot przenosi się do ekwipunku  |
 | TC_05 | Test sprawdza poprawność podnoszenia przedmiotów po osiągnięciu limitu przedmiotów w ekwipunku | 1. Uruchom grę  <br/> 2. Za pomocą klawiszy WASD, poruszając się po mapie spróbuj zebrać kilkanaście różnych przedmiotów.  | Po zebraniu 9 róźnych przedmiotów, gra blokuje możliwość podnoszenia kolejnych  |
-| TC_06 |  | 1.  <br/> 2.  |   |
-| TC_07 |  | 1.  <br/> 2.  |   |
-| TC_08 |  | 1.  <br/> 2.  |   |
-| TC_09 |  | 1.  <br/> 2.  |   |
-| TC_10 |  | 1.  <br/> 2.  |   |
+| TC_06 | Test sprawdza poprawność otwierania ekwipunku  | 1. Uruchom grę <br/> 2. Naciśnij przycisk "i"  | Okno ekwipunku poprawnie się otwiera  |
+| TC_07 | Test sprawdza poprawność otwierania karty postaci | 1. Uruchom grę  <br/> 2. Naciśnij przycisk "tab"  | Okno karty postaci poprawnie się otwiera  |
+| TC_08 | Test sprawdza poprawność zakładania przedmiotów  | 1. Uruchom grę  <br/> 2.  Za pomocą klawiszy WASD, poruszając się po mapie stań na  przedmiocie związanym z pancerzem. <br/> 3. Po zebraniu przedmiotu, za pomocą przycisków "i" oraz "tab" otwórz odpowiednie panele <br/> 4. Naciśnij  na dany element pancerza znajdujący się po prawej stronie ekranu    | Element pancerza poprawnie przenosi się z panelu ekwipunku do panelu ekranu postaci  |
+| TC_09 | Test sprawdza poprawność podmieniania przedmiotów  | 1. Uruchom grę  <br/> 2.  Za pomocą klawiszy WASD, poruszając się po mapie stań dwukrotnie na przedmiocie związanym z pancerzem (np. dwa hełmy, lub dwa pancerze) . <br/> 3. Po zebraniu przedmiotów, za pomocą przycisków "i" oraz "tab" otwórz odpowiednie panele <br/> 4. Naciśnij  na dany element pancerza znajdujący się po prawej stronie ekranu  <br/> 5. Ponownie naciśnij na drugi element pancerza znajdujący się po prawej stronie ekranu   | Elementy pancerza poprawnie zamieniają się miejscami. Hełm znajduący się na ekranie postaci trafia do ekwipunku, natomiast ten z ekwipunku przenosi się do ekranu postaci  |
+| TC_10 | Test sprawdza poprawność wyrzucania przedmiotu z ekwipunku | 1. Uruchom grę <br/> 2. Za pomocą klawiszy WASD, poruszając się po mapie stań na  przedmiocie <br/> 3. Otwórz panel ekwipunku za pomocą "i" <br/> 4. Przeciągnij przedmiot znajdujący się w panelu ekwipunku na mapę | Przedmiot poprawnię ląduje na mapie opuszczając tym samym panel ekwipunku  |
 
 
 # Technologie użyte w projekcie
