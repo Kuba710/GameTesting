@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 781c659a87dc4404a9b831612e71d848, type: 3}
   ItemName: Drink
   Price: 1
+  Weight: 1
   Stackable: 1
   Description: This is drink
   consumableType: 0

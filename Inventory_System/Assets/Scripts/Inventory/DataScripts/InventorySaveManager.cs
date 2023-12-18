@@ -13,9 +13,10 @@ public class InventorySaveManager : MonoBehaviour
         inventoryString = "";
         equipmentString = "";
 
-        foreach (Item item in InventoryController.Instance.ItemList)
+        foreach (InventorySlot slot in InventoryController.Instance.InventorySlots)
         {
-            inventoryString = inventoryString + item.Guid + ":" + InventoryController.Instance.quantityList[InventoryController.Instance.ItemList.IndexOf(item)] + "/";
+            Item item = slot.Item;
+            inventoryString = inventoryString + item.Guid + ":" + slot.Quantity + "/";
         }
 
         foreach (EquipmentSlot equipSlot in EquipmentController.Instance.EquipmentSlots)
@@ -74,19 +75,16 @@ public class InventorySaveManager : MonoBehaviour
 
     public void ReadInventoryData(string data, string data2)
     {
-
-        InventoryController.Instance.ItemList.Clear();
-        InventoryController.Instance.quantityList.Clear();
-
         string[] splitData = data.Split(char.Parse("/"));
+        int index = 0;
         foreach (string stg in splitData)
         {
             string[] splitID = stg.Split(char.Parse(":"));
 
             if (splitID.Length >= 2)
             {
-                InventoryController.Instance.ItemList.Add(itemLibrary[int.Parse(splitID[0])]);
-                InventoryController.Instance.quantityList.Add(int.Parse(splitID[1]));
+                InventoryController.Instance.InventorySlots[index].Item = itemLibrary[int.Parse(splitID[0])];
+                InventoryController.Instance.InventorySlots[index].Quantity = int.Parse(splitID[1]);
             }
         }
 

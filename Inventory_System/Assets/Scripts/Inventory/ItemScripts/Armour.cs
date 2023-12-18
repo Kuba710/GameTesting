@@ -5,9 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Armour", menuName = "Item/Equipment/Armour")]
 public class Armour : Equipment
 {
-    public List<PlayerStats> statsToModify = new List<PlayerStats>();
-    public List<string> modifyValue = new List<string>();
-
     public override void Use()
     {
         base.Use();
@@ -25,24 +22,26 @@ public class Armour : Equipment
 
                         slot.ItemEquipped = this as Item;
 
-                        if (slot.ItemEquipped.Stackable == false || (slot.ItemEquipped.Stackable && InventoryController.Instance.ItemList.Count < InventoryController.Instance.SlotList.Count))
+                        if (slot.Icon != null)
                         {
                             slot.Icon.enabled = true;
                             slot.Icon.sprite = slot.ItemEquipped.ItemIcon;
-
-                            InventoryController.Instance.RemoveItem(slot.ItemEquipped, 1);
-                            InventoryController.Instance.AddItem(itemBefore, 1);
                         }
-                        else { slot.ItemEquipped = itemBefore; }
+
+                        InventoryController.Instance.RemoveItem(slot.ItemEquipped, 1);
+                        InventoryController.Instance.AddItem(itemBefore, 1);
+
                     }
 
                 }
                 else
                 {
-
-                    slot.Icon.enabled = true;
+                    if (slot.Icon != null)
+                    {
+                        slot.Icon.enabled = true;
+                        slot.Icon.sprite = slot.ItemEquipped.ItemIcon;
+                    }
                     slot.ItemEquipped = this as Item;
-                    slot.Icon.sprite = slot.ItemEquipped.ItemIcon;
 
                     InventoryController.Instance.RemoveItem(slot.ItemEquipped, 1);
 

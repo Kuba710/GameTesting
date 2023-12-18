@@ -4,19 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using Sirenix.OdinInspector;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Item item;
+    [SerializeField, ReadOnly] private int quantity;
     [SerializeField] private Image itemImage;
     [SerializeField] private Text quantityText;
     [SerializeField] private DragUI dragComponent;
 
     public Action<Item, InventorySlot> OnPointerEntered;
     public Action OnPointerExited;
-    private int quantity;
     public DragUI DragComponent { get => dragComponent; set => dragComponent = value; }
     public Item Item { get => item; set => item = value; }
+    public int Quantity { get => quantity; set => quantity = value; }
 
     public void OnEnable()
     {
@@ -26,32 +28,40 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         dragComponent.OnDropped -= DropItem;
     }
-    private void DropItem()
+    private void DropItem(PointerEventData eventData)
     {
-        InventoryController.Instance.DropItem(item);
+        if (!RectTransformUtility.RectangleContainsScreenPoint(InventoryController.Instance.InventoryPanel, Input.mousePosition) && !RectTransformUtility.RectangleContainsScreenPoint(EquipmentController.Instance.EquipmentPanel, Input.mousePosition))
+        {
+            InventoryController.Instance.DropItem(item);
+        }
+        else
+        {
+            InventorySlot targetSlot = InventoryController.Instance.GetNearestActive(eventData.pointerEnter.transform.position, this);
+            if (targetSlot != null)
+            {
+                InventoryController.Instance.MoveItemBetweenSlots(this, targetSlot);
+            }
+        }
     }
 
-    public void UpdateSlot(Item itemInSlot, int quantityInSlot)
+    public void UpdateSlot()
     {
-        item = itemInSlot;
+        if (itemImage == null || quantityText == null)
+            return;
 
-        if (itemInSlot != null && quantityInSlot != 0)
+        if (item != null && quantity != 0)
         {
-            quantity = quantityInSlot;
             itemImage.enabled = true;
-
-            itemImage.sprite = itemInSlot.ItemIcon;
+            itemImage.sprite = item.ItemIcon;
 
             if (quantity > 1)
             {
-
                 quantityText.enabled = true;
                 quantityText.text = quantity.ToString();
             }
             else
             {
                 quantityText.enabled = false;
-
             }
 
         }
@@ -70,27 +80,12 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         OnPointerExited?.Invoke();
     }
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (eventData.pointerDrag != null)
-        {
-            if (eventData.pointerDrag.GetComponentInParent<EquipmentSlot>() != null && !InventoryController.Instance.IsInventoryFull)
-            {
-                eventData.pointerDrag.GetComponentInParent<EquipmentSlot>().ReturnItemToInventory();
-            }
-        }
-    }
+
     public void UseItem()
     {
         if (item != null)
         {
-
             item.Use();
         }
-    }
-
-    public void RemoveItem()
-    {
-        InventoryController.Instance.RemoveItem(InventoryController.Instance.ItemList[InventoryController.Instance.ItemList.IndexOf(item)], 1);
     }
 }

@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: aa24cb1eb11ee7d4e9ebeb489a7f0bbc, type: 3}
   ItemName: Legendary Boots
   Price: 50
+  Weight: 4
   Stackable: 0
   Description: These are Legendary Boots
   SlotType: 2

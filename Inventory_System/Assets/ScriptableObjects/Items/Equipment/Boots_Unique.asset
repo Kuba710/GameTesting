@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 9e7b573802d86d3458fce5a56252ca20, type: 3}
   ItemName: Unique Boots
   Price: 30
+  Weight: 4
   Stackable: 0
   Description: These are Unique Boots
   SlotType: 2

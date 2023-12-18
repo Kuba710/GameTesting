@@ -6,33 +6,35 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+public struct SortingItemData
+{
+    public Item Item;
+    public int Quantity;
+
+    public SortingItemData(Item item, int quantity)
+    {
+        Item = item;
+        Quantity = quantity;
+    }
+}
 public class InventoryController : Singleton<InventoryController>
 {
     [SerializeField] private RectTransform inventoryPanel;
     [SerializeField] private ItemInfoUI itemInfoUI;
-    [SerializeField] private List<InventorySlot> slotList;
-    [SerializeField] private List<Item> itemList = new List<Item>();
-    public List<int> quantityList = new List<int>();
+    [SerializeField] private List<InventorySlot> inventorySlots = new List<InventorySlot>();
     [SerializeField] private Vector2 infoPanelPivot;
     [SerializeField] private Pickable pickableItemPrefab;
+    [SerializeField] private float moveItemDistanceFromSlot = 2f;
     private bool isOpened;
 
-    public List<InventorySlot> SlotList { get => slotList; set => slotList = value; }
-    public List<Item> ItemList { get => itemList; set => itemList = value; }
-
-    public bool IsInventoryFull => itemList.Count == slotList.Count;
-
+    public List<InventorySlot> InventorySlots { get => inventorySlots; set => inventorySlots = value; }
     public RectTransform InventoryPanel { get => inventoryPanel; set => inventoryPanel = value; }
+    public ItemInfoUI ItemInfoUI { get => itemInfoUI; set => itemInfoUI = value; }
 
-    public void DropItem(Item item)
-    {
-        RemoveItem(item, 1);
-        ItemSpawner.Instance.SpawnItem(item);
-    }
-
+    public Action<InventorySlot, InventorySlot> onDragTo;
     private void OnEnable()
     {
-        foreach (var inventorySlot in slotList)
+        foreach (var inventorySlot in inventorySlots)
         {
             inventorySlot.OnPointerEntered += ShowItemInfoPanel;
             inventorySlot.OnPointerExited += CloseItemInfoPanel;
@@ -40,20 +42,95 @@ public class InventoryController : Singleton<InventoryController>
     }
     private void OnDisable()
     {
-        foreach (var inventorySlot in slotList)
+        foreach (var inventorySlot in inventorySlots)
         {
             inventorySlot.OnPointerEntered -= ShowItemInfoPanel;
             inventorySlot.OnPointerExited -= CloseItemInfoPanel;
         }
     }
+    public bool IsInventoryFull()
+    {
+        foreach (var slot in inventorySlots)
+        {
+            if (slot.Item == null)
+                return false;
+        }
+        return true;
+    }
+    public void DropItem(Item item)
+    {
+        RemoveItem(item, 1);
+        ItemSpawner.Instance.SpawnItem(item);
+    }
+    public void SortItemsByName(bool ascending = true)
+    {
+        List<SortingItemData> sortedItems = GetSortingData();
+        sortedItems.Sort((x_item, y_item) =>
+        {
+            int result = string.Compare(x_item.Item?.ItemName, y_item.Item?.ItemName);
+            return ascending ? result : -result;
+        });
+        UpdateItemSlotsAfterSort(sortedItems);
+    }
+
+    public void SortItemsByPrice(bool ascending = true)
+    {
+        List<SortingItemData> sortedItems = GetSortingData();
+        sortedItems.Sort((x_item, y_item) =>
+        {
+            int result = x_item.Item?.Price.CompareTo(y_item.Item?.Price) ?? 0;
+            return ascending ? result : -result;
+        });
+        UpdateItemSlotsAfterSort(sortedItems);
+    }
+
+    public void SortItemsByWeight(bool ascending = true)
+    {
+        List<SortingItemData> sortedItems = GetSortingData();
+        sortedItems.Sort((x_item, y_item) =>
+        {
+            int result = x_item.Item?.Weight.CompareTo(y_item.Item?.Weight) ?? 0;
+            return ascending ? result : -result;
+        });
+        UpdateItemSlotsAfterSort(sortedItems);
+    }
+    private List<SortingItemData> GetSortingData()
+    {
+        List<SortingItemData> sortedItems = new List<SortingItemData>();
+
+        foreach (var slot in inventorySlots)
+        {
+            if (slot.Item != null)
+            {
+                sortedItems.Add(new SortingItemData(slot.Item, slot.Quantity));
+                slot.Item = null;
+            }
+        }
+        return sortedItems;
+    }
+
+    private void UpdateItemSlotsAfterSort(List<SortingItemData> sortedItems)
+    {
+        for (int i = 0; i < Mathf.Min(sortedItems.Count, inventorySlots.Count); i++)
+        {
+            inventorySlots[i].Item = sortedItems[i].Item;
+            inventorySlots[i].Quantity = sortedItems[i].Quantity;
+        }
+
+        UpdateInventoryUI();
+    }
+
     private void CloseItemInfoPanel()
     {
         itemInfoUI.ClosePanel();
     }
 
-    private void ShowItemInfoPanel(Item item, InventorySlot invSlot)
+    public void ShowItemInfoPanel(Item item, InventorySlot invSlot = default)
     {
-        itemInfoUI.ShowInfoPanel(item, infoPanelPivot, invSlot.transform.position);
+        Vector3 position = Vector3.zero;
+        if (invSlot != null)
+            position = invSlot.transform.position;
+        itemInfoUI.ShowInfoPanel(item, infoPanelPivot, position);
     }
 
     [Button]
@@ -61,37 +138,37 @@ public class InventoryController : Singleton<InventoryController>
     {
         if (itemAdded.Stackable)
         {
-            if (itemList.Contains(itemAdded))
+            foreach (var slot in inventorySlots)
             {
-                quantityList[itemList.IndexOf(itemAdded)] = quantityList[itemList.IndexOf(itemAdded)] + quantityAdded;
-            }
-            else
-            {
-
-                if (itemList.Count < slotList.Count)
+                if (slot.Item == itemAdded)
                 {
-                    itemList.Add(itemAdded);
-                    quantityList.Add(quantityAdded);
+                    slot.Quantity += quantityAdded;
+                    UpdateInventoryUI();
+                    return;
                 }
-                else { }
+                else if (slot.Item == null)
+                {
+                    slot.Item = itemAdded;
+                    slot.Quantity = 1;
+                    UpdateInventoryUI();
+                    return;
+                }
             }
-
         }
         else
         {
-            for (int i = 0; i < quantityAdded; i++)
+            foreach (var slot in inventorySlots)
             {
-                if (itemList.Count < slotList.Count)
+                if (slot.Item == null)
                 {
-                    itemList.Add(itemAdded);
-                    quantityList.Add(1);
+                    slot.Item = itemAdded;
+                    slot.Quantity = 1;
+                    UpdateInventoryUI();
+                    return;
                 }
-                else { }
-
             }
-
         }
-        UpdateInventoryUI();
+
     }
 
     public void ToggleActivity()
@@ -104,25 +181,26 @@ public class InventoryController : Singleton<InventoryController>
     {
         if (itemRemoved.Stackable)
         {
-            if (itemList.Contains(itemRemoved))
+            foreach (var slot in inventorySlots)
             {
-                quantityList[itemList.IndexOf(itemRemoved)] = quantityList[itemList.IndexOf(itemRemoved)] - quantityRemoved;
-
-                if (quantityList[itemList.IndexOf(itemRemoved)] <= 0)
+                if (slot.Item == itemRemoved)
                 {
-                    quantityList.RemoveAt(itemList.IndexOf(itemRemoved));
-                    itemList.RemoveAt(itemList.IndexOf(itemRemoved));
+                    var quant = Mathf.Clamp(slot.Quantity -= quantityRemoved, 0, 99);
+                    slot.Quantity = quant;
+
+                    if (quant == 0)
+                        slot.Item = null;
                 }
             }
-
         }
         else
         {
-            for (int i = 0; i < quantityRemoved; i++)
+            foreach (var slot in inventorySlots)
             {
-                quantityList.RemoveAt(itemList.IndexOf(itemRemoved));
-                itemList.RemoveAt(itemList.IndexOf(itemRemoved));
-
+                if (slot.Item == itemRemoved)
+                {
+                    slot.Item = null;
+                }
             }
         }
         UpdateInventoryUI();
@@ -130,36 +208,51 @@ public class InventoryController : Singleton<InventoryController>
 
     public void UpdateInventoryUI()
     {
-        int ind = 0;
-        foreach (InventorySlot slot in slotList)
+        foreach (InventorySlot slot in inventorySlots)
         {
-
-            if (itemList.Count != 0)
-            {
-
-                if (ind < itemList.Count)
-                {
-                    slot.UpdateSlot(itemList[ind], quantityList[ind]);
-                    ind = ind + 1;
-                }
-                else
-                {
-                    slot.UpdateSlot(null, 0);
-                }
-            }
-            else
-            {
-                slot.UpdateSlot(null, 0);
-            }
-
+            slot.UpdateSlot();
         }
-
-        if (EquipmentController.Instance.EquipmentPanel.gameObject.activeInHierarchy)
-        {
-            EquipmentController.Instance.StatusUI.OnEnable();
-        }
-
     }
 
+    public void MoveItemBetweenSlots(InventorySlot sourceSlot, InventorySlot targetSlot)
+    {
+        InventorySlot tempFirstSlot = new InventorySlot();
+        InventorySlot tempSecondSlot = new InventorySlot();
+        if (targetSlot.Item != null)
+        {
+            tempFirstSlot.Item = targetSlot.Item;
+            tempFirstSlot.Quantity = targetSlot.Quantity;
+        }
+        if (sourceSlot.Item != null)
+        {
+            tempSecondSlot.Item = sourceSlot.Item;
+            tempSecondSlot.Quantity = sourceSlot.Quantity;
+        }
+
+
+        sourceSlot.Item = tempFirstSlot.Item;
+        sourceSlot.Quantity = tempFirstSlot.Quantity;
+
+        targetSlot.Item = tempSecondSlot.Item;
+        targetSlot.Quantity = tempSecondSlot.Quantity;
+        UpdateInventoryUI();
+    }
+    public InventorySlot GetNearestActive(Vector2 anchor_pos, InventorySlot grabbedSlot = default)
+    {
+        InventorySlot nearest = null;
+        float min_dist = moveItemDistanceFromSlot;
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            Vector2 canvas_pos = slot.transform.position;
+            float dist = (canvas_pos - anchor_pos).magnitude;
+            if (dist < min_dist && slot.gameObject.activeInHierarchy)
+            {
+                min_dist = dist;
+                if (nearest != grabbedSlot || grabbedSlot == null)
+                    nearest = slot;
+            }
+        }
+        return nearest;
+    }
 
 }

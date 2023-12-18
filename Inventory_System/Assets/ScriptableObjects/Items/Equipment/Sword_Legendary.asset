@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 71eb2c2700882464ba99c2eecf6d44da, type: 3}
   ItemName: Legendary Sword
   Price: 50
+  Weight: 10
   Stackable: 0
   Description: This is two handed Legendary Sword
   SlotType: 4

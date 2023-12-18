@@ -10,11 +10,11 @@ public class EquipmentController : Singleton<EquipmentController>
     [SerializeField] private RectTransform equipmentPanel;
     [SerializeField] private StatusUI statusUI;
     [SerializeField] private ItemInfoUI itemInfoUI;
-    [SerializeField] private List<EquipmentSlot> equipmentSlots;
+    [SerializeField] private List<EquipmentSlot> equipmentSlots = new List<EquipmentSlot>();
     [SerializeField] private List<PlayerStats> playerStats;
     [SerializeField] private Vector2 infoPanelPivot;
     private bool isOpened;
-    
+
     public List<EquipmentSlot> EquipmentSlots { get => equipmentSlots; set => equipmentSlots = value; }
     public RectTransform EquipmentPanel { get => equipmentPanel; set => equipmentPanel = value; }
     public StatusUI StatusUI { get => statusUI; set => statusUI = value; }
@@ -54,23 +54,22 @@ public class EquipmentController : Singleton<EquipmentController>
     {
         foreach (EquipmentSlot slot in equipmentSlots)
         {
-
             if (slot.ItemEquipped != null)
             {
                 if (slot.ItemEquipped.GetType() == typeof(Armour))
                 {
                     Armour armour = slot.ItemEquipped as Armour;
-                    for (int i = 0; i < armour.statsToModify.Count; i++)
+                    for (int i = 0; i < armour.StatsToModify.Count; i++)
                     {
 
                         foreach (PlayerStats stat in playerStats)
                         {
-                            if (armour.statsToModify[i] == stat)
+                            if (armour.StatsToModify[i] == stat)
                             {
-                                if (armour.modifyValue[i].Contains("%"))
+                                if (armour.ModifyValue[i].Contains("%"))
                                 {
 
-                                    string[] stgArray = armour.modifyValue[i].Split(char.Parse("%"));
+                                    string[] stgArray = armour.ModifyValue[i].Split(char.Parse("%"));
 
                                     float percentage = float.Parse(stgArray[0]) / 100;
                                 }
@@ -85,17 +84,17 @@ public class EquipmentController : Singleton<EquipmentController>
                 else if (slot.ItemEquipped.GetType() == typeof(Weapon))
                 {
                     Weapon weapon = slot.ItemEquipped as Weapon;
-                    for (int i = 0; i < weapon.statsToModify.Count; i++)
+                    for (int i = 0; i < weapon.StatsToModify.Count; i++)
                     {
 
                         foreach (PlayerStats stat in playerStats)
                         {
-                            if (weapon.statsToModify[i] == stat)
+                            if (weapon.StatsToModify[i] == stat)
                             {
-                                if (weapon.modifyValue[i].Contains("%"))
+                                if (weapon.ModifyValue[i].Contains("%"))
                                 {
 
-                                    string[] stgArray = weapon.modifyValue[i].Split(char.Parse("%"));
+                                    string[] stgArray = weapon.ModifyValue[i].Split(char.Parse("%"));
 
                                     float percentage = float.Parse(stgArray[0]) / 100;
 
@@ -116,9 +115,19 @@ public class EquipmentController : Singleton<EquipmentController>
 
         //statusUI.UpdateStatusUI(playerStats, statsTotalValue, statsValue);
     }
-    public void DropItem(Item itemEquipped, int v)
+    public void DropItem(Item itemEquipped)
     {
-        
+        foreach (var slot in equipmentSlots)
+        {
+            if (slot.ItemEquipped = itemEquipped)
+            {
+                slot.ItemEquipped = null;
+                slot.Icon.enabled = false;
+                UpdateEquippedValues();
+                //statusUI.UpdateStatusUI(playerStats, statsTotalValue, statsValue);
+                ItemSpawner.Instance.SpawnItem(itemEquipped);
+                return;
+            }
+        }
     }
-
 }

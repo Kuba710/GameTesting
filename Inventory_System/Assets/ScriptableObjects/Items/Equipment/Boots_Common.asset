@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 95fa235f983b5b041afce47c76ee92e9, type: 3}
   ItemName: Common Boots
   Price: 10
+  Weight: 4
   Stackable: 0
   Description: These are Common Boots
   SlotType: 2

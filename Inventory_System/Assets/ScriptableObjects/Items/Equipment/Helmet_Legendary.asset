@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 3105960ef57106c4fab172b2876b8e5f, type: 3}
   ItemName: Legendary Helmet
   Price: 50
+  Weight: 5
   Stackable: 0
   Description: This is x Helmet
   SlotType: 0

@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 16d17d4ae0f910c4e8606a031aaadc88, type: 3}
   ItemName: Rare Gloves
   Price: 20
+  Weight: 3
   Stackable: 0
   Description: There are xx Gloves
   SlotType: 3

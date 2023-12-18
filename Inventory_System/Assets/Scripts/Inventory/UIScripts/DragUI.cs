@@ -11,7 +11,7 @@ public class DragUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     [SerializeField] private CanvasGroup canvasGroup;
     private Vector2 initialPosition;
 
-    public Action OnDropped;
+    public Action<PointerEventData> OnDropped;
     private void Awake()
     {
         initialPosition = transform.position;
@@ -19,7 +19,6 @@ public class DragUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        transform.parent.transform.SetAsLastSibling();
         canvasGroup.blocksRaycasts = false;
     }
     public void OnDrag(PointerEventData eventData)
@@ -30,10 +29,7 @@ public class DragUI : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     public void OnEndDrag(PointerEventData eventData)
     {
         GetComponentInParent<Canvas>().sortingOrder = 0;
-        if (!RectTransformUtility.RectangleContainsScreenPoint(InventoryController.Instance.InventoryPanel, Input.mousePosition) && !RectTransformUtility.RectangleContainsScreenPoint(EquipmentController.Instance.EquipmentPanel, Input.mousePosition))
-        {
-            OnDropped?.Invoke();
-        }
+        OnDropped?.Invoke(eventData);
         transform.position = initialPosition;
         canvasGroup.blocksRaycasts = true;
     }

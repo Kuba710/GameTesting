@@ -11,6 +11,7 @@ public class Item : ScriptableObject
     public Sprite ItemIcon;
     public string ItemName;
     public int Price;
+    public int Weight;
     public bool Stackable;
     public string Description;
 

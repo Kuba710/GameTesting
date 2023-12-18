@@ -26,29 +26,29 @@ public class ItemInfoUI : MonoBehaviour
                 Armour armour = itemInfo as Armour;
 
                 descriptionText.text = armour.Description + "\n";
-                for (int i = 0; i < armour.statsToModify.Count; i++)
+                for (int i = 0; i < armour.StatsToModify.Count; i++)
                 {
 
-                    if (armour.modifyValue[i].Contains("%"))
+                    if (armour.ModifyValue[i].Contains("%"))
                     {
 
-                        string[] stgArray = armour.modifyValue[i].Split(char.Parse("%"));
+                        string[] stgArray = armour.ModifyValue[i].Split(char.Parse("%"));
                         if (float.Parse(stgArray[0]) > 0)
                         {
-                            descriptionText.text = descriptionText.text + "+" + armour.modifyValue[i] + " " + armour.statsToModify[i] + "\n";
+                            descriptionText.text = descriptionText.text + "+" + armour.ModifyValue[i] + " " + armour.StatsToModify[i] + "\n";
                         }
                         else
                         {
-                            descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(stgArray[0])) + "% " + armour.statsToModify[i] + "\n";
+                            descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(stgArray[0])) + "% " + armour.StatsToModify[i] + "\n";
                         }
                     }
                     else
                     {
 
-                        if (float.Parse(armour.modifyValue[i]) > 0) { descriptionText.text = descriptionText.text + "+" + armour.modifyValue[i] + " " + armour.statsToModify[i] + "\n"; }
+                        if (float.Parse(armour.ModifyValue[i]) > 0) { descriptionText.text = descriptionText.text + "+" + armour.ModifyValue[i] + " " + armour.StatsToModify[i] + "\n"; }
                         else
 
-                        { descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(armour.modifyValue[i])) + " " + armour.statsToModify[i] + "\n"; }
+                        { descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(armour.ModifyValue[i])) + " " + armour.StatsToModify[i] + "\n"; }
                     }
 
 
@@ -61,29 +61,29 @@ public class ItemInfoUI : MonoBehaviour
             {
                 Weapon weapon = itemInfo as Weapon;
 
-                descriptionText.text = weapon.weaponType + "\n" + weapon.weaponSize + "\n";
-                for (int i = 0; i < weapon.statsToModify.Count; i++)
+                descriptionText.text = weapon.WeaponType + "\n" + weapon.WeaponSize + "\n";
+                for (int i = 0; i < weapon.StatsToModify.Count; i++)
                 {
-                    if (weapon.modifyValue[i].Contains("%"))
+                    if (weapon.ModifyValue[i].Contains("%"))
                     {
 
-                        string[] stgArray = weapon.modifyValue[i].Split(char.Parse("%"));
+                        string[] stgArray = weapon.ModifyValue[i].Split(char.Parse("%"));
                         if (float.Parse(stgArray[0]) > 0)
                         {
-                            descriptionText.text = descriptionText.text + "+" + weapon.modifyValue[i] + " " + weapon.statsToModify[i] + "\n";
+                            descriptionText.text = descriptionText.text + "+" + weapon.ModifyValue[i] + " " + weapon.StatsToModify[i] + "\n";
                         }
                         else
                         {
-                            descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(stgArray[0])) + "% " + weapon.statsToModify[i] + "\n";
+                            descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(stgArray[0])) + "% " + weapon.StatsToModify[i] + "\n";
                         }
                     }
                     else
                     {
 
-                        if (float.Parse(weapon.modifyValue[i]) > 0) { descriptionText.text = descriptionText.text + "+" + weapon.modifyValue[i] + " " + weapon.statsToModify[i] + "\n"; }
+                        if (float.Parse(weapon.ModifyValue[i]) > 0) { descriptionText.text = descriptionText.text + "+" + weapon.ModifyValue[i] + " " + weapon.StatsToModify[i] + "\n"; }
                         else
 
-                        { descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(weapon.modifyValue[i])) + " " + weapon.statsToModify[i] + "\n"; }
+                        { descriptionText.text = descriptionText.text + "- " + Mathf.Abs(float.Parse(weapon.ModifyValue[i])) + " " + weapon.StatsToModify[i] + "\n"; }
                     }
                 }
             }

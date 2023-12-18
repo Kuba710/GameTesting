@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+public enum ConsumableType { Drink, Food, Potion }
+
 [CreateAssetMenu(fileName = "Consumable", menuName = "Item/Consumable")]
 public class Consumable : Item
 {
-    public ConsumableType consumableType;
+    public ConsumableType ConsumableType;
  
     public int PointsRecover;
 
@@ -11,7 +13,5 @@ public class Consumable : Item
         base.Use();
         InventoryController.Instance.RemoveItem(this, 1);
     }
-
-    public enum ConsumableType { Drink, Food, Potion }
    
 }

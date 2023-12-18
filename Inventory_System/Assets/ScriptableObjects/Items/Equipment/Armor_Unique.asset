@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Armor_Unique
   m_EditorClassIdentifier: 
   Guid: dc5ee545-4906-4aea-9742-9df509ead824
+  ItemIcon: {fileID: 21300000, guid: 7305f0907338505428e785125d548383, type: 3}
   ItemName: Unique Armor
   Price: 30
+  Weight: 20
   Stackable: 0
-  ItemIcon: {fileID: 21300000, guid: 7305f0907338505428e785125d548383, type: 3}
   Description: This is Unique Armor
   SlotType: 1
   RareLevel: 2

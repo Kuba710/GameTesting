@@ -33,26 +33,4 @@ public class StatusUI : MonoBehaviour
 
 
     }
-
-    public void OnEnable()
-    {
-        foreach (InventorySlot slot in InventoryController.Instance.SlotList)
-        {
-            if (slot.Item != null)
-            {
-                slot.DragComponent.enabled = true;
-            }
-            else
-            {
-                slot.DragComponent.enabled = false;
-            }
-        }
-    }
-    public void OnDisable()
-    {
-        foreach (InventorySlot slot in InventoryController.Instance.SlotList)
-        {
-            slot.DragComponent.enabled = false;
-        }
-    }
 }

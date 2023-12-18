@@ -26,9 +26,12 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler, IPointerEnterHandler
     {
         dragComponent.OnDropped -= DropItem;
     }
-    private void DropItem()
+    private void DropItem(PointerEventData eventData)
     {
-        //EquipmentController.Instance.DropItem(itemEquipped, 1);
+        if (!RectTransformUtility.RectangleContainsScreenPoint(InventoryController.Instance.InventoryPanel, Input.mousePosition) && !RectTransformUtility.RectangleContainsScreenPoint(EquipmentController.Instance.EquipmentPanel, Input.mousePosition))
+        {
+            EquipmentController.Instance.DropItem(itemEquipped);
+        }
     }
     public void OnDrop(PointerEventData eventData)
     {

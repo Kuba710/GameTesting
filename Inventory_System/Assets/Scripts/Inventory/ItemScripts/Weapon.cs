@@ -7,11 +7,9 @@ public enum WeaponType { Sword }
 [CreateAssetMenu(fileName = "Weapon", menuName = "Item/Equipment/Weapon")]
 public class Weapon : Equipment
 {
-    public WeaponSlotSpace weaponSize;
-    public WeaponType weaponType;
-    public float damage;
-    public List<PlayerStats> statsToModify = new List<PlayerStats>();
-    public List<string> modifyValue = new List<string>();
+    public WeaponSlotSpace WeaponSize;
+    public WeaponType WeaponType;
+    public float Damage;
 
     public override void Use()
     {
@@ -48,7 +46,7 @@ public class Weapon : Equipment
         {
 
             Weapon other = weapon1.ItemEquipped as Weapon;
-            if (weaponSize == WeaponSlotSpace.OnedHanded && other.weaponSize == WeaponSlotSpace.OnedHanded)
+            if (WeaponSize == WeaponSlotSpace.OnedHanded && other.WeaponSize == WeaponSlotSpace.OnedHanded)
             {
 
 
@@ -77,7 +75,7 @@ public class Weapon : Equipment
          if (weapon1.ItemEquipped == null && weapon2.ItemEquipped != null)
         {
             Weapon other = weapon2.ItemEquipped as Weapon;
-            if (weaponSize == WeaponSlotSpace.OnedHanded && other.weaponSize == WeaponSlotSpace.OnedHanded)
+            if (WeaponSize == WeaponSlotSpace.OnedHanded && other.WeaponSize == WeaponSlotSpace.OnedHanded)
             {
 
 
@@ -108,7 +106,7 @@ public class Weapon : Equipment
         {
 
 
-            if (weaponSize == WeaponSlotSpace.OnedHanded)
+            if (WeaponSize == WeaponSlotSpace.OnedHanded)
             {
                 weapon1.Icon.enabled = true;
 

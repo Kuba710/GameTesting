@@ -13,7 +13,7 @@ public class Pickable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!InventoryController.Instance.IsInventoryFull)
+            if (!InventoryController.Instance.IsInventoryFull())
             {
                 InventoryController.Instance.AddItem(item, 1);
                 Destroy(gameObject);

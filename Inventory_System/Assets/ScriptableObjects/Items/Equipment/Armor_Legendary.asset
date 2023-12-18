@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Armor_Legendary
   m_EditorClassIdentifier: 
   Guid: 38369ee9-4bbb-42eb-a948-292b158288d2
+  ItemIcon: {fileID: 21300000, guid: 33a6c92bcde124e459647f34242d0353, type: 3}
   ItemName: Legendary Armor
   Price: 50
+  Weight: 16
   Stackable: 0
-  ItemIcon: {fileID: 21300000, guid: 33a6c92bcde124e459647f34242d0353, type: 3}
   Description: This is Legendary Armor
   SlotType: 1
   RareLevel: 3

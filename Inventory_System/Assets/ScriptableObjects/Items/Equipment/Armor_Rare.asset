@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Armor_Rare
   m_EditorClassIdentifier: 
   Guid: 2e6bd5a8-ca4d-458d-878f-0c7a63adc54d
+  ItemIcon: {fileID: 21300000, guid: 98b6b58b2cb401349bfc4033afbb41dc, type: 3}
   ItemName: Rare Armor
   Price: 20
+  Weight: 18
   Stackable: 0
-  ItemIcon: {fileID: 21300000, guid: 98b6b58b2cb401349bfc4033afbb41dc, type: 3}
   Description: This is Rare Armor
   SlotType: 1
   RareLevel: 1

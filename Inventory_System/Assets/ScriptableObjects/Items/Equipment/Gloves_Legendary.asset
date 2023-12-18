@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 3c947e11dd2a4e94fb440e1412950079, type: 3}
   ItemName: Legendary Gloves
   Price: 50
+  Weight: 3
   Stackable: 0
   Description: There are xx Gloves
   SlotType: 3
