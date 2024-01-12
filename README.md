@@ -14,11 +14,14 @@ Na projekt składa się fragment kodu z pracy inżynierskiej. Projekt na ten mom
 
 # Uruchomienie projektu
 1. Sklonuj repozytorium z githuba
-2. Uruchom Unity
+2. Uruchom Unity Hub
 3. Otwórz pobrany folder w Unity
-4. 
 
 # Uruchomienie testów jednostkowych i integracyjnych
+1. Uruchom projekt w Unity
+2. Z paska narzędzi uruchom Test Runnera (Window -> General -> Test Runner)
+3. W Test Runnerze mamy dwie zakładki: PlayMode( Testy integracyjne) oraz EditMode (Testy jednostkowe). Wybierając jedną z nich ukażą nam się testy.
+4. Teraz zaznaczając jeden dowolny test i klikając "Run selected" uruchomimy test. Zielony znacznik oznacza że on przeszedł, czerwony że nie. Możemy też kliknąć przycisk "Run All" które uruchomi wszystkie znajdujące się w tej zakładce testy.
 
 
 # Scenariusze testowe dla testera manualnego
