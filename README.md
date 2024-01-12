@@ -13,10 +13,13 @@ Testowanie fragmentu kodu pracy inżynierskiej - Zaawansowany system ekwipunku w
 Na projekt składa się fragment kodu z pracy inżynierskiej. Projekt na ten moment(praca inżynierska) nie jest skończony więc testowane będzie to co udało mi się do tej pory zrobić. Po rozpoczęciu rozgrywki gracz ma możliwość podnieść kilka przedmiotów a także założyć je na siebie. Możemy tutaj także spotkać przedmioty użytkowe(woda, jedzenie) które po prostu możemy użyć. W przyszłości zwiększą one nasze punkty zdrowia. Gracz ma także możliwość wyrzucania przedmiotów.
 
 # Uruchomienie projektu
+1. Sklonuj repozytorium z githuba
+2. Uruchom Unity
+3. Otwórz pobrany folder w Unity
+4. 
 
 # Uruchomienie testów jednostkowych i integracyjnych
 
-# Dokumentacja API
 
 # Scenariusze testowe dla testera manualnego
 | Test Case ID | Opis | Kroki testowe | Oczekiwany wynik |
